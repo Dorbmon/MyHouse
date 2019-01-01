@@ -19,7 +19,7 @@ func main(){
 		fmt.Println(err);
 	}
 	http.HandleFunc("/dht",Dht)
-	http.ListenAndServe("0.0.0.0",nil)
+	http.ListenAndServe("0.0.0.0:1000",nil)
 }
 func Dht(w http.ResponseWriter, r *http.Request){
 	//读取数据
@@ -27,24 +27,15 @@ func Dht(w http.ResponseWriter, r *http.Request){
 	var Data []byte
 	if err != nil{
 		Data = []byte(`
-	<div class="container">
-   <div class="jumbotron">
         <h1>来自DHT11传感器的讯息</h1>
         传感器错误。请检查引脚是否插在:a
-   </div>
-</div>
-`)
+		`)
 	}
 	Data = []byte(`
-	<div class="container">
-   <div class="jumbotron">
-        <h1>来自DHT11传感器的讯息</h1>
-        <p>温度:<h1>` + FloatToString(temperature) + `</h1></n>
-		湿度:<h1>` + FloatToString(humidity) +`%</h1></p></n>
-		尝试次数:<1>`+ strconv.Itoa(retried) +`
-   </div>
-</div>
-`)
+        <h2>来自DHT11传感器的讯息</h2>
+        温度:<h1>` + FloatToString(temperature) + `</h1></n>
+		湿度:<h1>` + FloatToString(humidity) +`%</h1.</n>
+		尝试次数:<h1>`+ strconv.Itoa(retried) + `</h1>`)
 	w.Write(Data)
 	return
 }

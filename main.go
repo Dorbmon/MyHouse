@@ -34,7 +34,7 @@ func Dht(w http.ResponseWriter, r *http.Request){
 	Data = []byte(`
         <h2>来自DHT11传感器的讯息</h2>
         温度:<h1>` + FloatToString(temperature) + `</h1></n>
-		湿度:<h1>` + FloatToString(humidity) +`%</h1.</n>
+		湿度:<h1>` + FloatToString(humidity) +`%</h1></n>
 		尝试次数:<h1>`+ strconv.Itoa(retried) + `</h1>`)
 	w.Write(Data)
 	return
